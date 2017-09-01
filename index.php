@@ -1,6 +1,19 @@
 <?php 
     session_start();    
-    if(isset($_SESSION['id_usuario'])){
+    if(isset($_SESSION['id_usuario'])){   
+      include ('verificar_login.php');
+      if ($ver){
+        //echo "log ok";
+      }else{header("Location: login.php?codigo=2");}
+    }else{
+      header("Location: login.php?codigo=1"); 
+      echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
+      } 
+      /*
+        codigo
+        1 - sesion no iniciada
+        2 - el id no corresponde con el de la BD, posiblemnte hay otro usuario logeado
+      */
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,6 +105,21 @@
         document.location.href = "gen_movimiento.php?id_barco="+id_barco+"&id_op="+id_op;
      console.log(id_barco);
   };*/
+ /*$(document).ready(function () { 
+$.ajax({
+  type: "post",
+  url: "verificar_login.php",
+  data: "data",
+  success: function (response) {
+    var val = response.trim();
+    alert( val.length)
+    if (val == "id_session_equal"){
+      $('#msjeUsuario').text('Login OK')
+      alert("true")
+    }else{alert("false")}
+  }
+});
+});*/
 
   $('.btn_barco').click(function(event) {
     var id=$(this).attr('id');
@@ -108,15 +136,3 @@ jQuery(document).ready(function($) {
   </script>
 </body>
 </html>
-<?php
-}else{ 
-
-  if ( $_SESSION['jerarquia'] >4) {
-     header("Location: index.php?text=denegado"); 
-  }else{
-    header("Location: login.php"); 
-echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
-  }
- 
-
-}?>

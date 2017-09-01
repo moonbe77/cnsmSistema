@@ -4,7 +4,6 @@ jconfirm.defaults = {
     title: 'Hola!',
     titleClass: '',
     type: 'dark',
-    theme: 'dark',
     draggable: false,
     alignMiddle: true,
     typeAnimated: true,
@@ -96,12 +95,12 @@ alert(p);
 x++;
 }
 }
-$(document).ready(function($) {
-   let servicio = obtenerURL("codigo"); //llamo a la funcion obtenerURL
+/*$(document).ready(function($) {
+   let servicio = obtenerURL("servicio"); //llamo a la funcion obtenerURL
     if (servicio){//mejorar esta condicion
-      console.log('Codigo de error'+servicio); 
+      console.log(servicio); 
     }
-});
+});*/
 
 
 //muestro la cantidad de servicios activos en el menu de cada servicio :)
@@ -115,16 +114,7 @@ $(document).ready(function($) {
             $('#qty'+servicio).text(mensaje);
             console.log (servicio +'='+ mensaje);
            }); 
-  } 
+  }
+
+  
 });
-
-
-/*
-    $.getJSON("/permisos.json", function(datos) {
-        console.log("Dato: " + datos["dato"]);
-        $.each(datos["jerarquias"], function(idx,primo) {
-            alert("Numero primo: " + mov_id);
-        });
-    });
-*/
-

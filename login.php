@@ -1,6 +1,8 @@
-<?php 
-    session_destroy();
-    session_start();   
+<?php  
+  session_start();
+  session_unset();
+  session_destroy();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@
   <link rel="stylesheet" href="css/style.css"/>  
   <link rel="stylesheet" href="css/menu.css" type="text/css">
   <link rel="stylesheet" href="css/jquery-confirm.css"/>
-  <link href="https://fonts.googleapis.com/icon?family=M/aterial+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 <style>
 .col12{
@@ -91,6 +93,50 @@ $(document).ready(function($) {
      });
   });
 });
+//TOMO LA URL Y OBTENGO EL ID para mostrar el barco que viene desde INDEX
+function obtenerURL(param)
+{
+/* Obtener la url completa */
+url = document.URL;
+/* Buscar a partir del signo de interrogación ? */
+url = String(url.match(/\?+.+/));
+/* limpiar la cadena quitándole el signo ? */
+url = url.replace("?", "");
+/* Crear un array con parametro=valor */
+url = url.split("&");
+
+/* 
+Recorrer el array url
+obtener el valor y dividirlo en dos partes a través del signo = 
+0 = parametro
+1 = valor
+Si el parámetro existe devolver su valor
+*/
+x = 0;
+while (x < url.length)
+{
+p = url[x].split("=");
+if (p[0] == param)
+{
+return decodeURIComponent(p[1]);
+alert(p);
+}
+x++;
+}
+}
+ 
+   let codigo = obtenerURL("codigo"); //llamo a la funcion obtenerURL
+    if (codigo==1){//mejorar esta condicion
+      console.log(codigo); 
+      alert('debes iniciar sesion')
+    }
+    if (codigo==2){//mejorar esta condicion
+      console.log(codigo); 
+      alert('debes iniciar de nuevo, alguien inicio el sistema en otro navegador')
+    }
+
+
+
 
   </script>
 </body>
