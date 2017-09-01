@@ -1,0 +1,64 @@
+<header id="header"> <!-- header -->
+        <figure class="logotipo"> <!-- logotipo -->
+          <img src="img/cnsm_logo.png" height="60" alt="Sistema CNSM"/>
+        </figure>
+        <span class="burguer-button icon-menu" id="burguer-button"></span>   
+
+   <nav > <!-- menu -->
+          <ul class="menu">
+            <li class="menu_home">
+              <a href="index.php">Home</a>
+            </li>  
+             <li>
+              <a href="ingresar_barco.php">Ingresar Barco</a>
+            </li>                   
+             <li class="menu_movimientos">
+              <a href="#">Movimientos</a>
+                <ul class="sub-menu">
+                  <li class="submenu_nuevo">
+                    <a href="nuevo_movimiento.php">Nuevo</a>
+                  </li>
+                  <li class="submenu_varadero">
+                    <a href="barcos_activos.php?servicio=varadero">Varadero<span class="qtyServ" id="qtyvaradero"></span></a>
+                  </li>
+                  <li class="submenu_nn">
+                    <a href="barcos_activos.php?servicio=pluma">Pluma<span class="qtyServ" id="qtypluma"></span></a>
+                  </li>
+                  <li class="submenu_nn">
+                    <a href="barcos_activos.php?servicio=palera">Palera<span class="qtyServ" id="qtypalera"></span></a>
+                  </li>
+                  <li class="submenu_nn">
+                    <a href="barcos_activos.php?servicio=lavado">Lavado de Fondo<span class="qtyServ" id="qtyfondo"></span></a>
+                  </li>                  
+                </ul>
+            </li>
+            <li>
+              <a href="barcos.php">Barcos</a>
+            </li>       
+            <li>
+              <a href="log.php">LOG</a>
+            </li>       
+            <li><a href="#">Informes</a>
+              <ul class="sub-menu">
+                <li><a href="info1.php?ID=1172">Info1</a></li>
+                <li><a href="reportico-4.6/noadmin.php?execute_mode=EXECUTE&%20project=CNSM&xmlin=Actividad_P_v1.xml&%20target_format=PDF">Sol. Pendientes</a></li>
+                <li><a href="reportico-4.6/noadmin.php?execute_mode=EXECUTE&%20project=CNSM&xmlin=Activos_Varadero.xml&%20target_format=PDF">Act. Varadero</a></li>
+              </ul>
+            </li> 
+            <li> 
+            <a href="#"><i class="material-icons">person</i></a>
+              <ul>
+                <?php if (@isset($_SESSION['usuario_nick'])){
+                    echo '
+                    <li><a  href="logout.php" title="Cerrar Sesión">Usuario:'.@$_SESSION['usuario_nick'];
+                    echo '<i class="material-icons">close</i></a></li>';
+                  }else{include ('login.php'); }
+                    ?> 
+              </ul>  
+             </li>  
+            
+          </ul>
+        </nav>
+      </header>
+
+
