@@ -188,6 +188,9 @@ $(document).ready(function($) {
 		/* Act on the event */
 
 		//*** verificar que la jerarqui permita hacer el movimiento***/
+		if (jerUsuario >=5){
+			alert('no puedes hacer esto')
+		}else{
 
 		let idbarco=$(this).attr('data-idbarco');
 		let idmov=$(this).attr('data-idmovimiento');
@@ -231,7 +234,7 @@ $.confirm({
 
 	});
 });
-
+}
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
  	$.post("accion.php", {id_barco: id_barco, id_movimiento:id_mov, id_op:id_operacion, fecha:fecha, coment_op:comentario}, function(mensaje) {
 		$("#resultadoBusqueda").html(mensaje);
