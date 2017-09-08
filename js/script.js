@@ -96,6 +96,8 @@ alert(p);
 x++;
 }
 }
+
+
 $(document).ready(function($) {
    let servicio = obtenerURL("codigo"); //llamo a la funcion obtenerURL
     if (servicio){//mejorar esta condicion
