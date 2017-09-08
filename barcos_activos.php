@@ -1,6 +1,24 @@
 <?php 
-		session_start();   
-		if(isset($_SESSION['id_usuario']) && $_SESSION['jerarquia'] <=4 ){ 
+    session_start();    
+    if(isset($_SESSION['id_usuario'])){   
+      include ('verificar_login.php');
+      if ($ver){
+		//echo "log ok";
+		$jer = $_SESSION['jerarquia'];
+		echo '<script>
+				var jerUsuario ='.$jer.' 
+		</script>';
+      }else{header("Location: login.php?codigo=2");}
+    }else{
+      header("Location: login.php?codigo=1"); 
+      echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
+	  } 
+      /*
+        codigo
+        1 - sesion no iniciada
+        2 - el id no corresponde con el de la BD, posiblemnte hay otro usuario logeado
+	  */
+	  
 ?>
 <!DOCTYPE html>
 <html>
@@ -168,12 +186,16 @@ $(document).ready(function($) {
 	$(this).on('click', '.bt_accion', function(event) {
 		/*event.preventDefault();*/
 		/* Act on the event */
+
+		//*** verificar que la jerarqui permita hacer el movimiento***/
+
 		let idbarco=$(this).attr('data-idbarco');
 		let idmov=$(this).attr('data-idmovimiento');
 		let idop=$(this).attr('data-idop');
 		let nombreMov=$(this).attr('data-nombre-mov');
 		let nombreBarco=$(this).attr('data-nombre-barco');
-		console.log(nombreMov);     
+		console.log(nombreMov);
+
 $.confirm({
 	theme: 'dark', // 'material', 'bootstrap'
 	title: 'Confirmar !',
@@ -228,8 +250,3 @@ function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
 </script>
 </body>
 </html>
-<?php 
-} else {
-	header("Location: login.php");  echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
-	}
-?>

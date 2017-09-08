@@ -1,6 +1,19 @@
 <?php 
-    session_start();   
-    if(isset($_SESSION['id_usuario']) && $_SESSION['jerarquia'] <=4 ){ 
+    session_start();    
+    if(isset($_SESSION['id_usuario'])){   
+      include ('verificar_login.php');
+      if ($ver){
+        //echo "log ok";
+      }else{header("Location: login.php?codigo=2");}
+    }else{
+      header("Location: login.php?codigo=1"); 
+      echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
+      } 
+      /*
+        codigo
+        1 - sesion no iniciada
+        2 - el id no corresponde con el de la BD, posiblemnte hay otro usuario logeado
+      */
 ?>
 <!DOCTYPE html>
 <html>
@@ -189,4 +202,3 @@ jQuery(document).ready(function($) {
   </script>
 </body>
 </html>
-<?php } else {header("Location: login.php");  echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';}?>
