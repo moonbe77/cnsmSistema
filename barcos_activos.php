@@ -144,9 +144,9 @@ switch ($servicio) {
 <?php include('footer.html');?>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="js/jquery-confirm.js" async defer></script>
 <script src="js/menu.js" type="text/javascript"></script>
-  <script src="js/script.js" async defer></script>  
+<script src="js/jquery-confirm.js" ></script>
+  <script src="js/script.js" ></script>  
 
 
 <script>
@@ -178,26 +178,36 @@ $(document).ready(function() {
        		// statements_def
        		break;
        }
-      console.log(servicio);
+      //console.log(servicio);
 });
 
 
 $(document).ready(function($) {  
 	$(this).on('click', '.bt_accion', function(event) {
 		/*event.preventDefault();*/
-		/* Act on the event */
 
-		//*** verificar que la jerarqui permita hacer el movimiento***/
-		if (jerUsuario >=5){
-			alert('no puedes hacer esto')
+		let idbarco=$(this).attr('data-idbarco');
+		let idmov=$(this).attr('data-idmovimiento');
+		let idop=$(this).attr('data-idop');
+		let nombreMov=$(this).attr('data-nombre-mov');
+		let nombreBarco=$(this).attr('data-nombre-barco');
+			console.log(idmov);
+		
+			//*** verificar que la jerarqui permita hacer el movimiento***/
+		if (jerUsuario >=5 && (idmov != "19" || idmov != "14" || idmov != "11" || idmov != "12" )){
+			//alert('no puedes hacer esto')
+			$.alert({
+			title: 'No puedes realizar esa acción',
+			content: "Tu usuario no permite este movimiento",
+			onAction: function (btnName) {
+			        // when a button is clicked, with the button name
+			        //alert('onAction: ' + btnName);
+			        window.location = document.URL;
+    					}
+			});  
 		}else{
 
-			let idbarco=$(this).attr('data-idbarco');
-			let idmov=$(this).attr('data-idmovimiento');
-			let idop=$(this).attr('data-idop');
-			let nombreMov=$(this).attr('data-nombre-mov');
-			let nombreBarco=$(this).attr('data-nombre-barco');
-			console.log(nombreMov);
+			
 
 			$.confirm({
 				theme: 'dark', // 'material', 'bootstrap'
@@ -233,6 +243,7 @@ $(document).ready(function($) {
 				}
 				});				
 			});
+
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
  	$.post("accion.php", {id_barco: id_barco, id_movimiento:id_mov, id_op:id_operacion, fecha:fecha, coment_op:comentario}, function(mensaje) {
 		$("#resultadoBusqueda").html(mensaje);

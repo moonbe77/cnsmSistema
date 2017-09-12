@@ -101,7 +101,7 @@ x++;
 $(document).ready(function($) {
    let servicio = obtenerURL("codigo"); //llamo a la funcion obtenerURL
     if (servicio){//mejorar esta condicion
-      console.log('Codigo de error'+servicio); 
+     // console.log('Codigo de error'+servicio); 
     }
 });
 
@@ -130,3 +130,19 @@ $(document).ready(function($) {
     });
 */
 
+/*
+var nickUsuario ='.$_SESSION["usuario_nick"].' 
+var jerUsuario ='.$_SESSION["jerarquia"].' 
+var idUsuario ='.$_SESSION["id_usuario"].' 
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("nickUsuario", nickUsuario);
+    localStorage.setItem("jerUsuario", jerUsuario);
+    localStorage.setItem("idUsuario", idUsuario);
+    // Retrieve
+        console.log(localStorage.getItem("nickUsuario"))
+} else {
+    console.log( "Sorry, your browser does not support Web Storage...")
+}
+*/
