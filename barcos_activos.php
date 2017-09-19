@@ -185,58 +185,57 @@ $(document).ready(function() {
 $(document).ready(function($) {  
 	$(this).on('click', '.bt_accion', function(event) {
 		/*event.preventDefault();*/
-
-		let idbarco=$(this).attr('data-idbarco');
-		let idmov=$(this).attr('data-idmovimiento');
-		let idop=$(this).attr('data-idop');
-		let nombreMov=$(this).attr('data-nombre-mov');
-		let nombreBarco=$(this).attr('data-nombre-barco');
-			console.log(idmov);
-			if (jerUsuario != 1){
-				//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
-				if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
-					confirmarAccion()					
-				}else{	
-					alerta() //llamo a la funcion alerta
-					}		
-			}else{
-				confirmarAccion()
+	let idbarco=$(this).attr('data-idbarco');
+	let idmov=$(this).attr('data-idmovimiento');
+	let idop=$(this).attr('data-idop');
+	let nombreMov=$(this).attr('data-nombre-mov');
+	let nombreBarco=$(this).attr('data-nombre-barco');
+		console.log(idmov);
+		if (jerUsuario != 1){
+			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
+			if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
+				confirmarAccion(idbarco,idmov,idop,nombreMov,nombreBarco)					
+			}else{	
+				alerta() //llamo a la funcion alerta
 				}		
-			});
-			});
+		}else{
+			confirmarAccion(idbarco,idmov,idop,nombreMov,nombreBarco)
+				}		
+	});
+});
 
-var confirmarAccion = function (params) {
+var confirmarAccion = function (idbarco,idmov,idop,nombreMov,nombreBarco) {
 	$.confirm({
-						theme: 'dark', // 'material', 'bootstrap'
-						title: 'Confirmar !',
-						content: 'Confirma',
-						buttons: {
-								Aceptar: {
-									text: 'Aceptar', // Some Non-Alphanumeric characters
-									action: function () {  
-										//genero el movimiento
-										new_mov(idbarco, idmov, idop);
-										console.log('ok');
-										//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
-										//o crear un call back con jqeryconfirm				
-										console.log(document.URL)
-									}
-								},
-									Cancelar: function(){// here the key 'something' will be used as the text.
-											//$.alert('cancelando');
-									}      
-								},
-								onContentReady: function(){
-							//var jc = this;
-						//this.setTitle("TEST TEST"),
-						this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
-						},
-						onAction: function (btnName) {
-							// when a button is clicked, with the button name
-							//alert('onAction: ' + btnName);
-							//window.location = document.URL;
-						},
-							});
+		theme: 'dark', // 'material', 'bootstrap'
+		title: 'Confirmar !',
+		content: 'Confirma',
+		buttons: {
+				Aceptar: {
+					text: 'Aceptar', // Some Non-Alphanumeric characters
+					action: function () {  
+						//genero el movimiento
+						new_mov(idbarco, idmov, idop);
+						console.log('ok');
+						//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
+						//o crear un call back con jqeryconfirm				
+						console.log(document.URL)
+					}
+				},
+					Cancelar: function(){// here the key 'something' will be used as the text.
+							//$.alert('cancelando');
+					}      
+				},
+				onContentReady: function(){
+			//var jc = this;
+		//this.setTitle("TEST TEST"),
+		this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
+		},
+		onAction: function (btnName) {
+			// when a button is clicked, with the button name
+			//alert('onAction: ' + btnName);
+			//window.location = document.URL;
+		},
+			});
 }
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
  	$.post("accion.php", {id_barco: id_barco, id_movimiento:id_mov, id_op:id_operacion, fecha:fecha, coment_op:comentario}, function(mensaje) {
