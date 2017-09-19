@@ -194,7 +194,7 @@ $(document).ready(function($) {
 			console.log(idmov);
 		
 			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
-		if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
+		if (jerUsuario == 2 && (idmov != "6" || idmov != "7" || idmov != "11" || idmov != "12" || idmov != "14" )){
 			//alert('no puedes hacer esto')
 			$.alert({
 				title: 'No puedes realizar esa acción',
