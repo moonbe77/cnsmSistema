@@ -192,44 +192,45 @@ $(document).ready(function($) {
 		let nombreMov=$(this).attr('data-nombre-mov');
 		let nombreBarco=$(this).attr('data-nombre-barco');
 			console.log(idmov);
-		
-			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
-		if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
-			
-			$.confirm({
-				theme: 'dark', // 'material', 'bootstrap'
-				title: 'Confirmar !',
-				content: 'Confirma',
-				buttons: {
-						Aceptar: {
-							text: 'Aceptar', // Some Non-Alphanumeric characters
-							action: function () {  
-								//genero el movimiento
-								new_mov(idbarco, idmov, idop);
-								console.log('ok');
-								//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
-								//o crear un call back con jqeryconfirm				
-								console.log(document.URL)
-							}
+			if (jerUsuario != 1){
+				//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
+				if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
+					
+					$.confirm({
+						theme: 'dark', // 'material', 'bootstrap'
+						title: 'Confirmar !',
+						content: 'Confirma',
+						buttons: {
+								Aceptar: {
+									text: 'Aceptar', // Some Non-Alphanumeric characters
+									action: function () {  
+										//genero el movimiento
+										new_mov(idbarco, idmov, idop);
+										console.log('ok');
+										//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
+										//o crear un call back con jqeryconfirm				
+										console.log(document.URL)
+									}
+								},
+									Cancelar: function(){// here the key 'something' will be used as the text.
+											//$.alert('cancelando');
+									}      
+								},
+								onContentReady: function(){
+							//var jc = this;
+						//this.setTitle("TEST TEST"),
+						this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
 						},
-							Cancelar: function(){// here the key 'something' will be used as the text.
-									//$.alert('cancelando');
-							}      
+						onAction: function (btnName) {
+							// when a button is clicked, with the button name
+							//alert('onAction: ' + btnName);
+							//window.location = document.URL;
 						},
-						onContentReady: function(){
-					//var jc = this;
-				//this.setTitle("TEST TEST"),
-				this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
-				},
-				onAction: function (btnName) {
-					// when a button is clicked, with the button name
-					//alert('onAction: ' + btnName);
-					//window.location = document.URL;
-				},
-					});
-		}else{	
-			alerta() //llamo a la funcion alerta
-				}				
+							});
+				}else{	
+					alerta() //llamo a la funcion alerta
+						}		
+				}		
 			});
 			});
 
