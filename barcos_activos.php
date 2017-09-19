@@ -195,8 +195,18 @@ $(document).ready(function($) {
 			if (jerUsuario != 1){
 				//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
 				if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
-					
-					$.confirm({
+					confirmarAccion()					
+				}else{	
+					alerta() //llamo a la funcion alerta
+					}		
+			}else{
+				confirmarAccion()
+				}		
+			});
+			});
+
+var confirmarAccion = function (params) {
+	$.confirm({
 						theme: 'dark', // 'material', 'bootstrap'
 						title: 'Confirmar !',
 						content: 'Confirma',
@@ -227,13 +237,7 @@ $(document).ready(function($) {
 							//window.location = document.URL;
 						},
 							});
-				}else{	
-					alerta() //llamo a la funcion alerta
-						}		
-				}		
-			});
-			});
-
+}
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
  	$.post("accion.php", {id_barco: id_barco, id_movimiento:id_mov, id_op:id_operacion, fecha:fecha, coment_op:comentario}, function(mensaje) {
 		$("#resultadoBusqueda").html(mensaje);
