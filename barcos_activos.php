@@ -194,18 +194,8 @@ $(document).ready(function($) {
 			console.log(idmov);
 		
 			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
-		if (jerUsuario == 2 && (idmov != "6" || idmov != "7" || idmov != "11" || idmov != "12" || idmov != "14" )){
-			//alert('no puedes hacer esto')
-			$.alert({
-				title: 'No puedes realizar esa acción',
-				content: "Tu usuario no permite este movimiento",
-				onAction: function (btnName) {
-						// when a button is clicked, with the button name
-						//alert('onAction: ' + btnName);
-						//window.location = document.URL;
-				}
-			});  
-		}else{	
+		if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
+			
 			$.confirm({
 				theme: 'dark', // 'material', 'bootstrap'
 				title: 'Confirmar !',
@@ -237,8 +227,10 @@ $(document).ready(function($) {
 					//window.location = document.URL;
 				},
 					});
-				}
-				});				
+		}else{	
+			alerta() //llamo a la funcion alerta
+				}				
+			});
 			});
 
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
@@ -254,6 +246,14 @@ function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
     					}
 			});              
 	 }); 
+}
+
+var alerta = function (params) {
+	//alert('no puedes hacer esto')
+	$.alert({
+		title: 'No puedes realizar esa acción',
+		content: "Tu usuario no permite este movimiento",				
+			});  
 }
 
 </script>
