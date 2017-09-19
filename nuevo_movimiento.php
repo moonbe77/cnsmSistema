@@ -2,11 +2,11 @@
     session_start();    
     if(isset($_SESSION['id_usuario'])){   
       include ('verificar_login.php');
-      if ($ver){
+      if ($ver){ //$ver hace referencia a la verificacion de las claves de sesion
         //echo "log ok";
       }else{header("Location: login.php?codigo=2");}
     }else{
-      header("Location: login.php?codigo=1"); 
+      header("Location: login.php"); 
       echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
       } 
       /*

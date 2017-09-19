@@ -193,22 +193,19 @@ $(document).ready(function($) {
 		let nombreBarco=$(this).attr('data-nombre-barco');
 			console.log(idmov);
 		
-			//*** verificar que la jerarqui permita hacer el movimiento***/
-		if (jerUsuario >=5 && (idmov != "19" || idmov != "14" || idmov != "11" || idmov != "12" )){
+			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
+		if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
 			//alert('no puedes hacer esto')
 			$.alert({
-			title: 'No puedes realizar esa acción',
-			content: "Tu usuario no permite este movimiento",
-			onAction: function (btnName) {
-			        // when a button is clicked, with the button name
-			        //alert('onAction: ' + btnName);
-			        window.location = document.URL;
-    					}
+				title: 'No puedes realizar esa acción',
+				content: "Tu usuario no permite este movimiento",
+				onAction: function (btnName) {
+						// when a button is clicked, with the button name
+						//alert('onAction: ' + btnName);
+						//window.location = document.URL;
+				}
 			});  
-		}else{
-
-			
-
+		}else{	
 			$.confirm({
 				theme: 'dark', // 'material', 'bootstrap'
 				title: 'Confirmar !',
@@ -216,7 +213,7 @@ $(document).ready(function($) {
 				buttons: {
 						Aceptar: {
 							text: 'Aceptar', // Some Non-Alphanumeric characters
-						action: function () {  
+							action: function () {  
 								//genero el movimiento
 								new_mov(idbarco, idmov, idop);
 								console.log('ok');
@@ -224,7 +221,7 @@ $(document).ready(function($) {
 								//o crear un call back con jqeryconfirm				
 								console.log(document.URL)
 							}
-							},
+						},
 							Cancelar: function(){// here the key 'something' will be used as the text.
 									//$.alert('cancelando');
 							}      
