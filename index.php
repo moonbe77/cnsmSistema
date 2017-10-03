@@ -78,7 +78,7 @@
             </div>
             <div class="card">
               <div class="card-header">
-                    <div class="card_title">Lavado de Fondo</div>
+                    <div class="card_title">LAVADO DE FONDO</div>
               </div>
               <div class="card-main" id="card_activos">                
                 <div class="main-description">
