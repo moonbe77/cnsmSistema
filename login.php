@@ -81,7 +81,7 @@ $(document).ready(function($) {
                      backgroundDismiss: function(){
                       redireccionarPagina()
                       return false; // modal wont close.
-    },
+                    },
                 });          
         }else{          
           $.alert({
