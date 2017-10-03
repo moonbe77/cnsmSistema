@@ -4,12 +4,6 @@
             
         require('acceso_db.php');
 
-        //$consulta = mysqli_query($conn, "SELECT * FROM tabla_operaciones WHERE zona != 0 GROUP BY id_barco");
-   /*$consulta=mysqli_query($conn, 
-            "SELECT * FROM tabla_operaciones AS a
-                inner join (
-                SELECT max(time_stamp) AS time_stamp, id_barco FROM tabla_operaciones GROUP BY id_barco) AS b ON (a.id_barco=b.id_barco and a.time_stamp=b.time_stamp) WHERE zona != 0");*/
-
     //consulta para Pluma
     $consulta=mysqli_query($conn, 
             //"SELECT * FROM tabla_operaciones WHERE realizado != 'si'  AND  zona = 4 OR realizado != 'si' AND  zona = 1");
@@ -52,7 +46,5 @@
               };//Fin while $resultados
 
             }; //Fin else $filas
-            echo $mensaje;
-
-            
-            ?>
+            echo $mensaje;            
+ ?>

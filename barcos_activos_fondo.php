@@ -37,35 +37,18 @@
 
                         //Output
                         $mensaje .= '
-                        <div class="box_activos">
-                             <div class="sel_barco">
-                                  <a href="mod_barco.php?id='.$res['id_barco'].'" title="Ver movimientos de '.$res['nombre_barco'] .'">'. $res['nombre_barco'] .'</a>
-                                  <span class="rey"> REY:'.$res['rey_barco'].' </span>
+                        <div class="box_activos">                             
+                               <div class="sel_barco">
+                               <a href="movimiento.php?id='.$res['id_barco'].'" title="Ver movimientos de '.$res['nombre_barco'] .'">'. $res['nombre_barco'] .'</a>
+                               <span class="rey"> REY:'.$res['rey_barco'].' </span>
 
-                               </div> 
+                            </div> 
                                <div class="link_ver_barco"> 
                                   <a href="barcos_activos.php?servicio=lavado" class="boton" id="'.$res['id_barco'].'&id_op='.$id_op.'" onClick="buscar('.$res['id_barco'].','.$id_op.');"><i class="material-icons">send</i>
                                   </a>  
                                 </div>
                           </div>'; }
-
-
-                                    /* $sql = mysqli_query($conn, 
-              "SELECT * FROM rel_zonas WHERE zona_actual = '$zona'");
-
-                while($res = mysqli_fetch_array($sql)) {
-                      $id_mov=$res['mov_id'];
-                      //$id_op=$res['id_operacion'];
-
-                      $sql2 = mysqli_query($conn, "SELECT * FROM indice_movimiento WHERE id_mov='$id_mov' ");
-
-                    while($res2 = mysqli_fetch_array($sql2)) {                      
-                $mensaje .= '     
-                <div class="bt_accion">
-                <a href="accion.php?id_barco='.$id_barco.'&id_movimiento='.$id_mov.'&id_op='.$id_op.'">'.$res2['nombre_mov'].'</a> 
-                </div>';
-                }
-                    }*/
+          
                                    
 
               };//Fin while $resultados

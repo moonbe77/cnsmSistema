@@ -2,13 +2,11 @@
         //Variable vacía (para evitar los E_NOTICE)
         $mensaje = "";
             
-        require('acceso_db.php');
-        
+        require('acceso_db.php');        
 
     $consulta=mysqli_query($conn, 
             "SELECT * FROM tabla_operaciones WHERE (realizado !='si' AND zona = 2 ) 
-                OR (realizado !='si' AND (zona = 3 OR zona = 8) ) ORDER BY fecha_operacion ASC");
-    
+                OR (realizado !='si' AND (zona = 3 OR zona = 8) ) ORDER BY fecha_operacion ASC");    
 
             //Obtiene la cantidad de filas que hay en la consulta
             $filas = mysqli_num_rows($consulta);
@@ -43,15 +41,10 @@
                                   <a href="barcos_activos.php?servicio=varadero" class="boton" id="'.$res['id_barco'].'&id_op='.$id_op.'" onClick="buscar('.$res['id_barco'].','.$id_op.');"><i class="material-icons">send</i>
                                   </a>  
                                 </div>
-                          </div>'; }
-                                    
-     
-                  
+                          </div>'; }                  
 
               };//Fin while $resultados
 
             }; //Fin else $filas
             echo $mensaje;
-
-            
-            ?>
+?>
