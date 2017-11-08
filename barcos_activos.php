@@ -1,6 +1,24 @@
 <?php 
-		session_start();   
-		if(isset($_SESSION['id_usuario']) && $_SESSION['jerarquia'] <=4 ){ 
+    session_start();    
+    if(isset($_SESSION['id_usuario'])){   
+      include ('verificar_login.php');
+      if ($ver){
+		//echo "log ok";
+		$jer = $_SESSION['jerarquia'];
+		echo '<script>
+				var jerUsuario ='.$jer.' 
+		</script>';
+      }else{header("Location: login.php?codigo=2");}
+    }else{
+      header("Location: login.php?codigo=1"); 
+      echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
+	  } 
+      /*
+        codigo
+        1 - sesion no iniciada
+        2 - el id no corresponde con el de la BD, posiblemnte hay otro usuario logeado
+	  */
+	  
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,9 +144,9 @@ switch ($servicio) {
 <?php include('footer.html');?>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="js/jquery-confirm.js" async defer></script>
 <script src="js/menu.js" type="text/javascript"></script>
-  <script src="js/script.js" async defer></script>  
+<script src="js/jquery-confirm.js" ></script>
+  <script src="js/script.js" ></script>  
 
 
 <script>
@@ -160,56 +178,65 @@ $(document).ready(function() {
        		// statements_def
        		break;
        }
-      console.log(servicio);
+      //console.log(servicio);
 });
 
 
 $(document).ready(function($) {  
 	$(this).on('click', '.bt_accion', function(event) {
 		/*event.preventDefault();*/
-		/* Act on the event */
-		let idbarco=$(this).attr('data-idbarco');
-		let idmov=$(this).attr('data-idmovimiento');
-		let idop=$(this).attr('data-idop');
-		let nombreMov=$(this).attr('data-nombre-mov');
-		let nombreBarco=$(this).attr('data-nombre-barco');
-		console.log(nombreMov);     
-$.confirm({
-	theme: 'dark', // 'material', 'bootstrap'
-	title: 'Confirmar !',
-	content: 'Confirma',
-	buttons: {
-			Aceptar: {
-				text: 'Aceptar', // Some Non-Alphanumeric characters
-			 action: function () {  
-					//genero el movimiento
-					new_mov(idbarco, idmov, idop);
-					console.log('ok');
-					//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
-					//o crear un call back con jqeryconfirm				
-					console.log(document.URL)
-				}
-				},
-				Cancelar: function(){						// here the key 'something' will be used as the text.
-						//$.alert('cancelando');
-				}      
-			},
-			onContentReady: function(){
-        //var jc = this;
-       //this.setTitle("TEST TEST"),
-       this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
-    },
-     onAction: function (btnName) {
-        // when a button is clicked, with the button name
-        //alert('onAction: ' + btnName);
-        //window.location = document.URL;
-    },
-
-		});
-
+	let idbarco=$(this).attr('data-idbarco');
+	let idmov=$(this).attr('data-idmovimiento');
+	let idop=$(this).attr('data-idop');
+	let nombreMov=$(this).attr('data-nombre-mov');
+	let nombreBarco=$(this).attr('data-nombre-barco');
+		console.log(idmov);
+		if (jerUsuario != 1){
+			//*** verificar que la jerarqui permita hacer el movimiento** 6 7 11 12 14*/
+			if (jerUsuario == 2 && (idmov == "6" || idmov == "7" || idmov == "11" || idmov == "12" || idmov == "14" )){
+				confirmarAccion(idbarco,idmov,idop,nombreMov,nombreBarco)					
+			}else{	
+				alerta() //llamo a la funcion alerta
+				}		
+		}else{
+			confirmarAccion(idbarco,idmov,idop,nombreMov,nombreBarco)
+				}		
 	});
 });
 
+var confirmarAccion = function (idbarco,idmov,idop,nombreMov,nombreBarco) {
+	$.confirm({
+		theme: 'dark', // 'material', 'bootstrap'
+		title: 'Confirmar !',
+		content: 'Confirma',
+		buttons: {
+				Aceptar: {
+					text: 'Aceptar', // Some Non-Alphanumeric characters
+					action: function () {  
+						//genero el movimiento
+						new_mov(idbarco, idmov, idop);
+						console.log('ok');
+						//agregar un time aut a este paso para que de tiempo a mysql a procesar la peticion
+						//o crear un call back con jqeryconfirm				
+						console.log(document.URL)
+					}
+				},
+					Cancelar: function(){// here the key 'something' will be used as the text.
+							//$.alert('cancelando');
+					}      
+				},
+				onContentReady: function(){
+			//var jc = this;
+		//this.setTitle("TEST TEST"),
+		this.setContent('<div class="confirmacion">Estas seguro que quieres : <strong>'+nombreMov+'</strong> para el barco: <strong>'+nombreBarco+'</strong></div>')
+		},
+		onAction: function (btnName) {
+			// when a button is clicked, with the button name
+			//alert('onAction: ' + btnName);
+			//window.location = document.URL;
+		},
+			});
+}
 function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
  	$.post("accion.php", {id_barco: id_barco, id_movimiento:id_mov, id_op:id_operacion, fecha:fecha, coment_op:comentario}, function(mensaje) {
 		$("#resultadoBusqueda").html(mensaje);
@@ -225,11 +252,14 @@ function new_mov(id_barco, id_mov, id_operacion, fecha, comentario){
 	 }); 
 }
 
+var alerta = function (params) {
+	//alert('no puedes hacer esto')
+	$.alert({
+		title: 'No puedes realizar esa acción',
+		content: "Tu usuario no permite este movimiento",				
+			});  
+}
+
 </script>
 </body>
 </html>
-<?php 
-} else {
-	header("Location: login.php");  echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
-	}
-?>

@@ -2,11 +2,11 @@
     session_start();    
     if(isset($_SESSION['id_usuario'])){   
       include ('verificar_login.php');
-      if ($ver){
+      if ($ver){ //$ver hace referencia a la verificacion de las claves de sesion
         //echo "log ok";
       }else{header("Location: login.php?codigo=2");}
     }else{
-      header("Location: login.php?codigo=1"); 
+      header("Location: login.php"); 
       echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
       } 
       /*
@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>CNSM Sistema</title>
+<title>CNSM Sistema - GITHUB VERS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css"/>  
 <link rel="stylesheet" href="css/menu.css" type="text/css">
@@ -78,7 +78,7 @@
             </div>
             <div class="card">
               <div class="card-header">
-                    <div class="card_title">Lavado de Fondo</div>
+                    <div class="card_title">LAVADO DE FONDO</div>
               </div>
               <div class="card-main" id="card_activos">                
                 <div class="main-description">
@@ -97,8 +97,8 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
   <script src="js/menu.js" type="text/javascript"></script>
-  <script src="js/jquery-confirm.js" async defer></script>
-  <script src="js/script.js" async defer></script>  
+  <script src="js/jquery-confirm.js" ></script>
+  <script src="js/script.js" ></script>  
 
 <script> 
   /*function buscar(id_barco,id_op) {

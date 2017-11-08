@@ -1,12 +1,19 @@
 <?php 
     session_start();    
-    if(isset($_SESSION['id_usuario'])){ 
-        if ($_SESSION['jerarquia'] >4){
-            $mensaje ="No tienes permiso para ver esta pagina";
-            $url=$_SERVER['REQUEST_URI'];
-            header("Location: error_login.php?msje=".$mensaje.$url); 
-            //echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
-        }
+    if(isset($_SESSION['id_usuario'])){   
+      include ('verificar_login.php');
+      if ($ver){
+        //echo "log ok";
+      }else{header("Location: login.php?codigo=2");}
+    }else{
+      header("Location: login.php?codigo=1"); 
+      echo 'INICIA SESION <br> <a href="login.php">VOLVER</a>';
+      } 
+      /*
+        codigo
+        1 - sesion no iniciada
+        2 - el id no corresponde con el de la BD, posiblemnte hay otro usuario logeado
+      */
 ?>
 <!DOCTYPE html>
 <html>
