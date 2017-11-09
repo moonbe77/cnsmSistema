@@ -111,7 +111,7 @@
     // ONEPROJECT - allows entry to a single project and no access to the admin page
     // ONEREPORT - limits user to single report, crtieria entry and report execution ( requires initial project/report )
     // REPORTOUTPUT - executes a report and allows to "Return" button to crtieria entry ( requires initial project/report )
-    $q->access_mode = "ONEPROJECT";
+    $q->access_mode = "ONEREPORT";
 
     // Generate report definition from SQL  and set some column / report attributes
     // Also the full report definition can be built up programmatically
