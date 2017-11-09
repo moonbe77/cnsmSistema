@@ -1,0 +1,26 @@
+<HTML>
+    <BODY>
+
+        ...... Your web content ...... 
+
+        <!-- Start of Reportico Report 
+        "reportico-4.6/noadmin.php?execute_mode=EXECUTE&%20project=CNSM&xmlin=Mov_Barco_v2.xml"
+        -->
+        <?php
+        require_once('reportico-4.6/reportico.php'); 
+        $q = new reportico();
+        $q->initial_project = "CNSM";
+        $q->initial_project_password = "cdlr3314";
+        $q->initial_report = "Mov_Barco_v2.xml";
+        $q->initial_execute_mode = "EXECUTE";
+        $q->initial_output_format = "HTML";
+        $q->access_mode = "REPORTOUTPUT";
+        $q->embedded_report = true;
+        $q->execute();
+      ?> 
+        < !-- End of Reportico Report -->
+
+        ...... More web content ......
+
+    </BODY>
+  </HTML>
